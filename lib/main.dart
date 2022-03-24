@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(PerguntasApp());
+  runApp(QuizApp());
 }
 
-class PerguntasAppState extends State<PerguntasApp> {
+class QuizAppState extends State<QuizApp> {
   var perguntaSelecionada = 0;
 
   List<String> perguntas = [
@@ -32,7 +32,7 @@ class PerguntasAppState extends State<PerguntasApp> {
       title: 'Perguntas',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Perguntas'),
+          title: Text('Quiz'),
         ),
         body: Column(
           children: [
@@ -56,8 +56,8 @@ class PerguntasAppState extends State<PerguntasApp> {
   }
 }
 
-class PerguntasApp extends StatefulWidget {
-  PerguntasAppState createState() {
-    return PerguntasAppState();
+class QuizApp extends StatefulWidget {
+  QuizAppState createState() {
+    return QuizAppState();
   }
 }
