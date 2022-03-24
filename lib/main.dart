@@ -4,24 +4,24 @@ void main() {
   runApp(QuizApp());
 }
 
-class QuizAppState extends State<QuizApp> {
-  var perguntaSelecionada = 0;
+class _QuizAppState extends State<QuizApp> {
+  var _perguntaSelecionada = 0;
 
   List<String> perguntas = [
     'Qual sua cor favorita?',
     'Qual seu filme favorito?',
   ];
 
-  void responder() {
+  void _responder() {
     setState(() {
-      perguntaSelecionada++;
+      _perguntaSelecionada++;
     });
-    print('Pergunta: $perguntaSelecionada');
+    print('Pergunta: $_perguntaSelecionada');
   }
 
-  String imprimePergunta() {
-    if (perguntaSelecionada < perguntas.length) {
-      return perguntas[perguntaSelecionada];
+  String _imprimePergunta() {
+    if (_perguntaSelecionada < perguntas.length) {
+      return perguntas[_perguntaSelecionada];
     } else {
       return perguntas[perguntas.length - 1];
     }
@@ -36,18 +36,18 @@ class QuizAppState extends State<QuizApp> {
         ),
         body: Column(
           children: [
-            Text(imprimePergunta()),
+            Text(_imprimePergunta()),
             RaisedButton(
               child: Text('Resposta 1'),
-              onPressed: responder,
+              onPressed: _responder,
             ),
             RaisedButton(
               child: Text('Resposta 2'),
-              onPressed: responder,
+              onPressed: _responder,
             ),
             RaisedButton(
               child: Text('Resposta 3'),
-              onPressed: responder,
+              onPressed: _responder,
             ),
           ],
         ),
@@ -57,7 +57,7 @@ class QuizAppState extends State<QuizApp> {
 }
 
 class QuizApp extends StatefulWidget {
-  QuizAppState createState() {
-    return QuizAppState();
+  _QuizAppState createState() {
+    return _QuizAppState();
   }
 }
