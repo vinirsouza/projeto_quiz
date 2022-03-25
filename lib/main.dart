@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './questao.dart';
 
 void main() {
   runApp(QuizApp());
@@ -36,7 +37,7 @@ class _QuizAppState extends State<QuizApp> {
         ),
         body: Column(
           children: [
-            Text(_imprimePergunta()),
+            Questao(_imprimePergunta()),
             RaisedButton(
               child: Text('Resposta 1'),
               onPressed: _responder,
