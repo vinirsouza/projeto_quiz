@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './resposta.dart';
 import './questao.dart';
 
 void main() {
@@ -8,9 +9,19 @@ void main() {
 class _QuizAppState extends State<QuizApp> {
   var _perguntaSelecionada = 0;
 
-  List<String> perguntas = [
-    'Qual sua cor favorita?',
-    'Qual seu filme favorito?',
+  final perguntas = [
+    {
+      'texto': 'Qual sua cor favorita?',
+      'respostas': ['Azul', 'Verde', 'Amarelo', 'Vermelho'],
+    },
+    {
+      'texto': 'Qual é seu animal favorito?',
+      'respostas': ['Macaco', 'Elefante', 'Leão', 'Tartaruga'],
+    },
+    {
+      'texto': 'Qual é seu filme favorito?',
+      'respostas': ['Matrix', 'Inception', 'Interestelar', 'Jumanji'],
+    }
   ];
 
   void _responder() {
@@ -22,9 +33,9 @@ class _QuizAppState extends State<QuizApp> {
 
   String _imprimePergunta() {
     if (_perguntaSelecionada < perguntas.length) {
-      return perguntas[_perguntaSelecionada];
+      return perguntas[_perguntaSelecionada]['texto'];
     } else {
-      return perguntas[perguntas.length - 1];
+      return perguntas[perguntas.length - 1]['texto'];
     }
   }
 
@@ -37,19 +48,10 @@ class _QuizAppState extends State<QuizApp> {
         ),
         body: Column(
           children: [
-            Questao(_imprimePergunta()),
-            RaisedButton(
-              child: Text('Resposta 1'),
-              onPressed: _responder,
-            ),
-            RaisedButton(
-              child: Text('Resposta 2'),
-              onPressed: _responder,
-            ),
-            RaisedButton(
-              child: Text('Resposta 3'),
-              onPressed: _responder,
-            ),
+            Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
+            Resposta('Resposta 1', _responder),
+            Resposta('Resposta 2', _responder),
+            Resposta('Resposta 3', _responder),
           ],
         ),
       ),
