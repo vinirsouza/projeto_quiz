@@ -31,15 +31,22 @@ class _QuizAppState extends State<QuizApp> {
     print('Pergunta: $_perguntaSelecionada');
   }
 
-  String _imprimePergunta() {
+  String _imprimePergunta(int pergunta, List perguntas) {
     if (_perguntaSelecionada < perguntas.length) {
-      return perguntas[_perguntaSelecionada]['texto'].toString();
+      return perguntas[pergunta]['texto'].toString();
     } else {
       return perguntas[perguntas.length - 1]['texto'].toString();
     }
   }
 
   Widget build(BuildContext context) {
+    List<String> respostas = perguntas[_perguntaSelecionada]['respostas'];
+    List widgets = respostas.map((t) => Resposta(t, _responder)).toList();
+
+    // for (String textoResposta in respostas) {
+    //   widgets.add(Resposta(textoResposta, _responder));
+    // }
+
     return MaterialApp(
       title: 'Perguntas',
       home: Scaffold(
@@ -48,10 +55,8 @@ class _QuizAppState extends State<QuizApp> {
         ),
         body: Column(
           children: [
-            Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
-            Resposta('Resposta 1', _responder),
-            Resposta('Resposta 2', _responder),
-            Resposta('Resposta 3', _responder),
+            Questao(_imprimePergunta(_perguntaSelecionada, perguntas)),
+            ...widgets,
           ],
         ),
       ),
