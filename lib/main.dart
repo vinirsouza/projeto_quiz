@@ -33,9 +33,9 @@ class _QuizAppState extends State<QuizApp> {
 
   String _imprimePergunta() {
     if (_perguntaSelecionada < perguntas.length) {
-      return perguntas[_perguntaSelecionada]['texto'];
+      return perguntas[_perguntaSelecionada]['texto'].toString();
     } else {
-      return perguntas[perguntas.length - 1]['texto'];
+      return perguntas[perguntas.length - 1]['texto'].toString();
     }
   }
 
