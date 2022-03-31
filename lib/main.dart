@@ -9,7 +9,7 @@ void main() {
 class _QuizAppState extends State<QuizApp> {
   var _perguntaSelecionada = 0;
 
-  final perguntas = [
+  final _perguntas = const [
     {
       'texto': 'Qual sua cor favorita?',
       'respostas': ['Azul', 'Verde', 'Amarelo', 'Vermelho'],
@@ -25,10 +25,17 @@ class _QuizAppState extends State<QuizApp> {
   ];
 
   void _responder() {
-    setState(() {
-      _perguntaSelecionada++;
-    });
+    if (temPerguntaSelecionada) {
+      setState(() {
+        _perguntaSelecionada++;
+      });
+    }
+
     print('Pergunta: $_perguntaSelecionada');
+  }
+
+  bool get temPerguntaSelecionada {
+    return _perguntaSelecionada < _perguntas.length;
   }
 
   String _imprimePergunta(int pergunta, List perguntas) {
@@ -40,8 +47,13 @@ class _QuizAppState extends State<QuizApp> {
   }
 
   Widget build(BuildContext context) {
-    List<String> respostas = perguntas[_perguntaSelecionada]['respostas'];
-    List widgets = respostas.map((t) => Resposta(t, _responder)).toList();
+    List<String> respostas = temPerguntaSelecionada
+        ? _perguntas[_perguntaSelecionada]['respostas']
+        : null;
+
+    List widgets = temPerguntaSelecionada
+        ? respostas.map((t) => Resposta(t, _responder)).toList()
+        : null;
 
     // for (String textoResposta in respostas) {
     //   widgets.add(Resposta(textoResposta, _responder));
@@ -49,16 +61,24 @@ class _QuizAppState extends State<QuizApp> {
 
     return MaterialApp(
       title: 'Perguntas',
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text('Quiz'),
         ),
-        body: Column(
-          children: [
-            Questao(_imprimePergunta(_perguntaSelecionada, perguntas)),
-            ...widgets,
-          ],
-        ),
+        body: temPerguntaSelecionada
+            ? Column(
+                children: [
+                  Questao(_perguntas[_perguntaSelecionada]['texto']),
+                  ...widgets,
+                ],
+              )
+            : Center(
+                child: Text(
+                  'Parabéns!',
+                  style: TextStyle(fontSize: 50),
+                ),
+              ),
       ),
     );
   }
