@@ -9,12 +9,14 @@ class Resposta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: double.maxFinite,
       child: RaisedButton(
         child: Text(texto),
         textColor: Colors.white,
-        color: Colors.blueAccent,
+        color: Colors.deepPurple,
         onPressed: quandoSelecionado,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(16.0))),
       ),
     );
   }

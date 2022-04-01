@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './resposta.dart';
-import './questao.dart';
+import './resultado.dart';
+import './questionario.dart';
 
 void main() {
   runApp(QuizApp());
@@ -65,20 +66,11 @@ class _QuizAppState extends State<QuizApp> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Quiz'),
+          backgroundColor: Colors.deepPurple,
         ),
         body: temPerguntaSelecionada
-            ? Column(
-                children: [
-                  Questao(_perguntas[_perguntaSelecionada]['texto']),
-                  ...widgets,
-                ],
-              )
-            : Center(
-                child: Text(
-                  'Parabéns!',
-                  style: TextStyle(fontSize: 50),
-                ),
-              ),
+            ? Questionario(_perguntas[_perguntaSelecionada]['texto'], widgets)
+            : Resultado(),
       ),
     );
   }
